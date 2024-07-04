@@ -7,7 +7,6 @@ TOKEN = getenv('BOT_TOKEN')
 OVERWATCH_CHANNEL = int(getenv('OVERWATCH_CHANNEL'))
 ADMIN_CHANNEL = int(getenv('ADMIN_CHANNEL'))
 NOTIFY_MESSAGE = getenv('NOTIFY_MESSAGE')
-NOTIFY_REPLY = getenv('NOTIFY_REPLY')
 
 from telegram import Update
 from telegram.ext import Application, ContextTypes, MessageHandler, filters
@@ -16,7 +15,7 @@ from telegram.ext import Application, ContextTypes, MessageHandler, filters
 async def check_ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message.chat.id == OVERWATCH_CHANNEL and '@admin' in update.message.text:
         await context.bot.send_message(chat_id=ADMIN_CHANNEL, text=NOTIFY_MESSAGE)
-        await update.message.reply_text(NOTIFY_REPLY)
+        await update.message.set_reaction(reaction='👍')
 
 
 def main() -> None:
