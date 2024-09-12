@@ -13,7 +13,7 @@ from telegram.ext import Application, ContextTypes, MessageHandler, filters
 
 
 async def check_ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    if update.message.chat.id == OVERWATCH_CHANNEL and '@admin' in update.message.text:
+    if update.message and update.message.chat.id == OVERWATCH_CHANNEL and '@admin' in update.message.text:
         await context.bot.send_message(chat_id=ADMIN_CHANNEL, text=NOTIFY_MESSAGE)
         await update.message.set_reaction(reaction='👍')
 
